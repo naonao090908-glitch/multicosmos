@@ -28,6 +28,19 @@
     .library-head{padding:42px 34px 22px}.archive-tools{display:flex;gap:10px;padding:0 34px 24px;flex-wrap:wrap}.search-box{flex:1;min-width:220px;background:rgba(255,250,240,.1);border:1px solid var(--line);border-radius:12px;color:white;padding:12px 14px}.book-menu{padding:26px 30px 35px;background:linear-gradient(90deg,#e6d9c2,#faf1df 47%,#e1d1b7);color:#28213d;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.index-link{display:flex;align-items:center;gap:9px;text-align:left;border:1px solid #c7ad82;background:rgba(255,252,243,.68);color:#322847;border-radius:10px;padding:12px;font:600 .78rem DM Sans,sans-serif;transition:.2s}.index-link:hover{background:#fff8e8;transform:translateY(-2px);box-shadow:0 8px 15px rgba(84,53,45,.18)}
     .chapter{background:linear-gradient(108deg,#f7efdf,#e7dbc6);color:#28223e;border:1px solid #d3bd99;border-radius:5px 19px 19px 5px;padding:clamp(24px,5vw,52px);box-shadow:inset 8px 0 16px rgba(107,70,35,.09),0 20px 45px rgba(0,0,0,.2)}.chapter h2{font-family:Fraunces,serif;font-size:clamp(2rem,4vw,3.4rem);line-height:1;margin:8px 0 20px}.chapter p{line-height:1.8}.rule{font-family:Fraunces,serif;font-size:clamp(1.4rem,3vw,2.3rem);line-height:1.2;color:#49377a;padding:22px;border-block:1px solid #bca376;margin:26px 0}
     .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:17px;margin-top:26px}.artifact{position:relative;border:1px solid rgba(229,214,255,.35);border-radius:16px;padding:18px;background:linear-gradient(145deg,rgba(83,70,142,.58),rgba(28,28,71,.84));box-shadow:0 12px 25px rgba(0,0,0,.16)}.artifact h3{font-family:Fraunces,serif;font-size:1.25rem;color:#fff6df;margin:8px 0}.artifact p{color:#dce5ef;font-size:.9rem;line-height:1.55}.editable{background:rgba(255,249,230,.11);border:1px dashed rgba(235,201,126,.75);border-radius:7px;padding:7px 9px;color:inherit;min-height:32px}.editable:focus{background:rgba(255,249,230,.22);outline:none}.tag{font:700 .65rem "Space Mono",monospace;letter-spacing:.07em;display:inline-block;padding:5px 7px;border-radius:99px;background:#eacb88;color:#29223e}.template-tag{background:#b9b0ec;color:#241c4b}.admin-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}.small-btn{border-radius:8px;padding:7px 9px;font-size:.65rem}.danger{border-color:#f1a1a1;color:#ffdada}.empty-image{height:118px;display:grid;place-items:center;border:1px dashed #cfb985;border-radius:10px;color:#725f7a;background:rgba(255,255,255,.25);font:.72rem "Space Mono",monospace;text-align:center;padding:8px}
+    .owner-mode-btn{position:fixed;right:14px;top:14px;z-index:5000;border:1px solid #cfb985;background:#fff6df;color:#342a48;border-radius:999px;padding:8px 12px;font:700 .68rem "Space Mono",monospace;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.16)}
+    .owner-mode-btn:hover{transform:translateY(-1px)}
+    body.visitor-mode [contenteditable="true"]{cursor:default!important;user-select:text}
+    body.visitor-mode .admin-row,
+    body.visitor-mode .image-actions,
+    body.visitor-mode button[onclick^="addCard"],
+    body.visitor-mode button[onclick^="addReservation"],
+    body.visitor-mode button[onclick^="duplicateCurrent"],
+    body.visitor-mode button[onclick^="resetEditable"],
+    body.visitor-mode button[onclick^="moveTop"],
+    body.visitor-mode button[onclick^="removeCard"],
+    body.visitor-mode button[onclick^="duplicateCard"]{display:none!important}
+    .owner-login-note{margin:0 0 14px;color:#dce5ef;font: .78rem "Space Mono",monospace;line-height:1.5}
     .timeline{display:grid;grid-template-columns:repeat(4,minmax(180px,1fr));gap:12px;overflow:auto;padding-bottom:8px}.timeline .artifact{min-width:180px}.world-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;margin-top:25px}.world-btn{aspect-ratio:1;border-radius:50%;border:2px solid rgba(220,198,255,.65);background:radial-gradient(circle at 35% 30%,#d5ccff,#735bbf 38%,#292358 70%);color:#fff9eb;font-family:Fraunces,serif;font-size:1.05rem;box-shadow:0 0 24px rgba(159,124,255,.34);transition:.25s}.world-btn:hover{transform:scale(1.06);box-shadow:0 0 38px rgba(233,200,128,.56)}
     .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}.tab{border:1px solid #bba88a;background:#f5ead5;padding:9px 11px;border-radius:7px;color:#382c4b;font-size:.72rem;font-weight:700}.tab.active{background:#55417f;color:white}.tab-panel{display:none}.tab-panel.active{display:block}.board{background:linear-gradient(135deg,#755b42,#503a2e);padding:26px;border:10px solid #241c24;border-radius:10px;box-shadow:inset 0 0 30px rgba(0,0,0,.38)}.board .artifact{background:#eee3cb;color:#32273c;transform:rotate(-.8deg)}.board .artifact:nth-child(2n){transform:rotate(1deg)}.board .artifact h3,.board .artifact p{color:#32273c}
     .table-wrap{overflow:auto;border-radius:14px;border:1px solid var(--line);margin-top:22px}.archive-table{width:100%;border-collapse:collapse;background:rgba(35,33,79,.72);min-width:670px}.archive-table th,.archive-table td{padding:13px;border-bottom:1px solid var(--line);text-align:left;font-size:.85rem}.archive-table th{color:#f1d388;font:700 .7rem "Space Mono",monospace;letter-spacing:.07em}.status-select{background:#302b62;color:white;border:1px solid #9c8ed2;border-radius:6px;padding:5px}
@@ -84,7 +97,7 @@ body{overflow-x:hidden}
  .enter-btn{max-width:90%;padding:13px 18px}
 }
 @media(min-width:701px){.object-popover{max-width:380px}}
-</style><style id="section-eyebrow-hide">.view:not(#view-1):not(#view-2) > .page-wrap > .eyebrow{display:none!important}</style><style id="owner-edit-guide">
+</style><style id="owner-edit-guide">
 /* ==================== OWNER: ZONA DE EDICIÓN ====================
    Cambia únicamente los datos marcados como EDITABLE.
    No necesitas tocar navegación, animaciones ni estructura.
@@ -92,13 +105,14 @@ body{overflow-x:hidden}
 .editable-owner{outline:none}
 </style>
 </head>
- <body data-template-id="__page-root" style="background: rgb(23, 26, 66);">
+ <body data-template-id="__page-root" style="background: rgb(23, 26, 66);" class="visitor-mode">
+  <button id="owner-mode-btn" class="owner-mode-btn" type="button" onclick="toggleOwnerMode()">🔐 MODO EDICIÓN</button>
   <div class="app-shell">
    <div class="starfield"></div>
    <main>
     <section id="view-1" class="view active portal-hero" aria-labelledby="hero-title"><img data-template-id="portal-hero-bg" class="portal-bg canva-image" loading="lazy" src="https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920" alt="Breathtaking view of the Milky Way galaxy captured at night in Punta Ballena, Uruguay."><button type="button" class="object-orbit o1" aria-label="Abrir secreto del libro" onclick="openSecret('LIBRO')">📖</button><button type="button" class="object-orbit o2" aria-label="Abrir secreto de la carta" onclick="openSecret('CARTA')">✉️</button><button type="button" class="object-orbit o3" aria-label="Abrir secreto de la mariposa" onclick="openSecret('MARIPOSA')">🦋</button><button type="button" class="object-orbit o4" aria-label="Abrir secreto de la caja" onclick="openSecret('CAJA')">📦</button>
      <div class="hero-inner">
-      <p data-template-id="presentation-quote" class="presentation-quote canva-text" style="color: rgb(232, 217, 183); font-weight: 400; font-style: italic; font-size: 16px;">"aquello a lo que hemos sobrevivido, vive dentro de nosotros"</p>
+      <p data-template-id="presentation-quote" class="presentation-quote canva-text" style="color: rgb(232, 217, 183); font-weight: 400; font-style: italic; font-size: 16px;">aquello a lo que hemos sobrevivido, vive dentro de nosotros</p>
       <p data-template-id="hero-kicker" class="eyebrow canva-text" style="color: rgb(234, 203, 136); font-weight: 700; font-style: normal; font-size: 16px;">ARCHIVO DIMENSIONAL · COMUNIDAD DE ROL Y ESCRITURA</p>
       <h1 id="hero-title" data-template-id="hero-title" class="hero-title canva-text" style="color: rgb(255, 248, 232); font-weight: 700; font-style: normal; font-size: 32px;">MULTICOSMOS</h1>
       <p data-template-id="hero-subtitle" class="hero-sub canva-text" style="color: rgb(224, 215, 255); font-weight: 700; font-style: normal; font-size: 16px;">1 mes · 1 mundo · 1 historia</p>
@@ -119,7 +133,7 @@ body{overflow-x:hidden}
       </div>
       <div class="archive-tools"><label class="sr-only" for="archive-search">Buscar sección</label> <input data-template-id="archive-search" id="archive-search" class="search-box canva-input" type="search" oninput="filterIndex()" placeholder="Buscar una sección del archivo…" style="background: rgba(255, 250, 240, 0.098); color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 16px;">
       </div>
-      <nav id="archive-index" class="book-menu" aria-label="Índice del Archivo Central"><button class="index-link" data-view="3">📖 ¿QUÉ ES MULTICOSMOS?</button><button class="index-link" data-view="4">🌀 ¿CÓMO FUNCIONA?</button><button class="index-link" data-view="6">📜 REGLAMENTO</button><button class="index-link" data-view="7">🖼️ FRAGMENTOS</button><button class="index-link" data-view="8">🔐 OCUPADOS</button> <button class="index-link" data-view="9">🔎 BUSCADOS</button><button class="index-link" data-view="13">⚔️ EVENTOS Y MISIONES</button><button class="index-link" data-view="14">⭐ SISTEMA DE PUNTOS</button> <button class="index-link" data-view="12">⚔️ SISTEMA DE ARMAS Y OBJETOS</button><button class="index-link" data-view="15">✦ LEGADO DEL PORTAL ✦</button><button class="index-link" data-view="10">📋 RESERVAS</button><button class="index-link" data-view="17">📚 LORE</button><button class="index-link" data-view="11">🌎 TEMÁTICA ACTUAL</button><button class="index-link" data-view="18">🗃️ ARCHIVO DE TEMÁTICAS</button> <button class="index-link" data-view="19">💬 RESEÑAS Y EXPERIENCIAS</button><button class="index-link" data-view="20">📢 ACTUALIZACIONES</button><button class="index-link" data-view="21">📱 REDES SOCIALES</button> <button class="index-link" data-view="22">❓ PREGUNTAS FRECUENTES</button>
+      <nav id="archive-index" class="book-menu" aria-label="Índice del Archivo Central"><button class="index-link" data-view="3">📖 ¿QUÉ ES MULTICOSMOS?</button><button class="index-link" data-view="4">🌀 ¿CÓMO FUNCIONA?</button><button class="index-link" data-view="6">📜 REGLAMENTO</button><button class="index-link" data-view="7">🎭 PERSONAJES</button><button class="index-link" data-view="8">🔐 OCUPADOS</button> <button class="index-link" data-view="9">🔎 BUSCADOS</button><button class="index-link" data-view="13">⚔️ EVENTOS Y MISIONES</button><button class="index-link" data-view="14">⭐ SISTEMA DE PUNTOS</button> <button class="index-link" data-view="12">⚔️ SISTEMA DE ARMAS Y OBJETOS</button><button class="index-link" data-view="15">✦ LEGADO DEL PORTAL ✦</button><button class="index-link" data-view="10">📋 RESERVAS</button><button class="index-link" data-view="17">📚 LORE</button><button class="index-link" data-view="11">🌎 TEMÁTICA ACTUAL</button><button class="index-link" data-view="18">🗃️ ARCHIVO DE TEMÁTICAS</button> <button class="index-link" data-view="19">💬 RESEÑAS Y EXPERIENCIAS</button><button class="index-link" data-view="20">📢 ACTUALIZACIONES</button><button class="index-link" data-view="21">📱 REDES SOCIALES</button> <button class="index-link" data-view="22">❓ PREGUNTAS FRECUENTES</button>
       </nav>
      </div>
     </section>
@@ -149,13 +163,13 @@ body{overflow-x:hidden}
     </section>
     <section id="view-7" class="view">
      <div class="page-wrap">
-      <p class="eyebrow">PÁGINA 07 · ÁLBUM DE RECUERDOS</p>
-      <h1 class="page-title">FRAGMENTOS</h1>
-      <p class="page-lead">Un álbum vivo de momentos, recuerdos, escenas, reacciones y acontecimientos del Multicosmos.</p>
+      <p class="eyebrow">PÁGINA 07 · CAJAS DE PERSONAJE</p>
+      <h1 class="page-title">PERSONAJES</h1>
+      <p class="page-lead">Biblioteca de fichas. Todas las entradas son plantillas editables.</p>
       <div class="admin-row">
-       <button class="small-btn" onclick="addCard('fragments')">AÑADIR FRAGMENTO</button>
+       <button class="small-btn" onclick="addCard('characters')">AÑADIR FICHA</button>
       </div>
-      <div id="fragments" class="card-grid"></div>
+      <div id="characters" class="card-grid"></div>
      </div>
     </section>
     <section id="view-8" class="view">
@@ -184,7 +198,7 @@ body{overflow-x:hidden}
     </section>
     <section id="view-10" class="view">
      <div class="page-wrap">
-      <p class="eyebrow">PÁGINA 10 · </p>
+      <p class="eyebrow">PÁGINA 10 · PLANTILLA EDITABLE</p>
       <h1 class="page-title">RESERVAS</h1>
       <div class="table-wrap">
        <table class="archive-table">
@@ -247,7 +261,7 @@ body{overflow-x:hidden}
         <div class="editable" contenteditable="true">
          [ EDITAR ]
         </div>
-        <h3 class="mt-4">NPC</h3>
+        <h3 class="mt-4">PERSONAJES DISPONIBLES</h3>
         <div class="editable" contenteditable="true">
          [ EDITAR ]
         </div>
@@ -387,10 +401,10 @@ body{overflow-x:hidden}
       rules:["REGLAS GENERALES","ROL","ADAPTACIÓN DE PERSONAJES","MEMORIA ENTRE MUNDOS","MUERTE","ACTIVIDAD","EVENTOS","MISIONES","CONVIVENCIA"],
       weekly:["SEMANA 1 — ATERRIZAJE","SEMANA 2 — CONFLICTO","SEMANA 3 — PUNTO DE QUIEBRE","SEMANA 4 — CIERRE"],
       mission:["EVENTOS LIBRES","MISIONES PRINCIPALES","MISIONES ESPECIALES","EVENTOS DE LA OWNER"],
-      arsenal:["⚔️ ARMAS","🧪 POCIONES","🗝️ OBJETOS","🛡️ EQUIPAMIENTO","✨ OBJETOS ESPECIALES","🌀 OBJETOS USOS"],
+      arsenal:["⚔️ ARMAS","🧪 POCIONES","🗝️ OBJETOS","🛡️ EQUIPAMIENTO","✨ OBJETOS ESPECIALES","🌀 OBJETOS DE UN SOLO USO"],
       points:["ACTIVIDAD","MENSAJES VÁLIDOS","MISIONES COMPLETADAS","DINÁMICAS","PARTICIPACIÓN","TOTAL"],
       team:["OWNER","ADMINISTRACIÓN","MODERACIÓN","EVENTOS","ACTIVIDADES"],
-      lore:["LORE RESUMIDO","LORE EXTENDIDO","ORIGEN DEL MULTICOSMOS",],
+      lore:["LORE RESUMIDO","LORE EXTENDIDO","ORIGEN DEL MULTICOSMOS","LOS PORTALES","LAS REGLAS DEL MULTIVERSO","CONSECUENCIAS"],
       faq:["¿Puedo usar el mismo personaje siempre?","¿Qué pasa si no vi la serie?","¿Hay ganador?","¿La owner participa en los eventos?","¿Todas las misiones tienen requisitos?","¿Qué pasa si fallo una misión?","¿Puedo negarme a participar?","¿Los personajes recuerdan otros mundos?","¿Puedo proponer temáticas?","¿Hay límite de integrantes?","¿Puedo hacer tramas 1x1?","¿Cuántos personajes puedo obtener?","¿Habrá documentos adicionales?","¿Tengo que rolear cada semana?"]
     };
 
@@ -430,13 +444,44 @@ body{overflow-x:hidden}
     function openSecret(kind){
       const title=`SECRETO · ${kind}`;
       document.getElementById("modal-title").textContent=title;
-      document.getElementById("modal-content").innerHTML=`<div class="image-slot" id="secret-preview" data-persist-key="secret-${kind}"><span class="image-placeholder"></span><img alt="Imagen editable"><button type="button" class="image-upload-btn" >📷 ELEGIR IMAGEN</button><input type="file" accept="image/*"></div><div class="editable" data-persist-text-key="secret-${kind}-info" contenteditable="true">[ INFORMACIÓN EDITABLE DEL ${kind} ]</div><button type="button" class="small-btn mt-3" onclick="closeModal()">CERRAR</button>`;
+      document.getElementById("modal-content").innerHTML=`<div class="image-slot" id="secret-preview" data-persist-key="secret-${kind}"><span class="image-placeholder"></span><img alt="Imagen editable"><button type="button" class="image-upload-btn" >📷 ELEGIR IMAGEN</button><input type="file" accept="image/*"></div><div class="editable" contenteditable="true">[ INFORMACIÓN EDITABLE DEL ${kind} ]</div><button type="button" class="small-btn mt-3" onclick="closeModal()">CERRAR</button>`;
       document.getElementById("modal").classList.add("show");
       // Restaurar la imagen guardada de esta carta cada vez que se vuelve a abrir.
       restoreImages();
     }
     function addSectionCloseActions(){}
-    function toggleAdmin(){document.getElementById("admin-panel").classList.toggle("open")}
+    let ownerMode=false;
+    // Bloqueo de edición para visitantes. Esto es una barrera de interfaz, no una seguridad de servidor.
+    // Cambia OWNER_ACCESS_CODE antes de publicar si quieres usar otra clave.
+    const OWNER_ACCESS_CODE='MULTICOSMOS-OWNER-2026';
+    function toggleOwnerMode(){
+      if(ownerMode){
+        ownerMode=false;
+        sessionStorage.removeItem('multicosmos-owner-mode');
+        applyOwnerMode();
+        notice('Modo visitante activado.');
+        return;
+      }
+      const code=window.prompt('Introduce la clave de Owner para activar el modo edición:');
+      if(code===OWNER_ACCESS_CODE){
+        ownerMode=true;
+        sessionStorage.setItem('multicosmos-owner-mode','1');
+        applyOwnerMode();
+        notice('Modo edición activado.');
+      }else if(code!==null){
+        notice('Clave incorrecta.');
+      }
+    }
+    function applyOwnerMode(){
+      document.body.classList.toggle('visitor-mode',!ownerMode);
+      document.body.classList.toggle('owner-mode',ownerMode);
+      document.querySelectorAll('[contenteditable]').forEach(el=>el.setAttribute('contenteditable',ownerMode?'true':'false'));
+      document.querySelectorAll('.image-upload-btn,.image-delete-btn').forEach(el=>el.disabled=!ownerMode);
+      const b=document.getElementById('owner-mode-btn');
+      if(b)b.textContent=ownerMode?'🔓 SALIR DEL MODO EDICIÓN':'🔐 MODO EDICIÓN';
+    }
+    function toggleAdmin(){if(!ownerMode){notice('Activa el modo edición para modificar el archivo.');return;}document.getElementById("admin-panel").classList.toggle("open")}
+    function requireOwner(){if(ownerMode)return true;notice('Esta función está disponible solo para Owner.');return false;}
     function notice(text){const n=document.getElementById("notice");n.textContent=text;n.classList.add("show");setTimeout(()=>n.classList.remove("show"),2600)}
     function filterIndex(){const term=document.getElementById("archive-search").value.toLowerCase();document.querySelectorAll(".index-link").forEach(b=>b.style.display=b.textContent.toLowerCase().includes(term)?"flex":"none")}
     
@@ -444,20 +489,20 @@ body{overflow-x:hidden}
     function editable(text){return `<div class="editable" contenteditable="true">${text}</div>`}
     function actions(id){return `<div class="admin-row"><button class="small-btn" onclick="openCard(this)">ABRIR / EDITAR</button><button class="small-btn" onclick="duplicateCard(this)">DUPLICAR</button><button class="small-btn danger" onclick="removeCard(this)">ELIMINAR</button></div>`}
     const types={
-      fragments:()=>`<article class="artifact"><div class="image-slot mt-3"><span class="image-placeholder">[ IMAGEN DEL FRAGMENTO ]</span><img alt="Imagen del fragmento"><button type="button" class="image-upload-btn" >📷 ELEGIR IMAGEN</button><input type="file" accept="image/*"></div><h3 contenteditable="true">TÍTULO</h3>${editable("DESCRIPCIÓN")}${editable("CONTEXTO / MOMENTO")}${actions()}</article>`,
+      characters:()=>`<article class="artifact"><span class="tag template-tag">PLANTILLA EDITABLE</span><div class="image-slot mt-3"><span class="image-placeholder">[ IMAGEN DEL PERSONAJE ]</span><img alt="Imagen del personaje"><button type="button" class="image-upload-btn" >📷 ELEGIR IMAGEN</button><input type="file" accept="image/*"></div><h3 contenteditable="true">NOMBRE</h3>${editable("OBRA")}${editable("USUARIO")}${editable("ESTADO")}${actions()}</article>`,
       occupied:()=>`<article class="artifact"><div class="image-slot"><span class="image-placeholder">[ IMAGEN ]</span><img alt="Imagen editable"><button type="button" class="image-upload-btn" >📷 ELEGIR IMAGEN</button><input type="file" accept="image/*"></div><h3 contenteditable="true">PERSONAJE</h3>${editable("OBRA")}${editable("USUARIO")}${editable("ESTADO")}${editable("FECHA")}${actions()}</article>`,
       wanted:()=>`<article class="artifact"><div class="image-slot"><span class="image-placeholder">[ IMAGEN ]</span><img alt="Imagen editable"><button type="button" class="image-upload-btn" >📷 ELEGIR IMAGEN</button><input type="file" accept="image/*"></div><h3 contenteditable="true">SE BUSCA</h3>${editable("PERSONAJE")}${editable("OBRA")}${editable("BUSCADO POR")}${editable("TIPO DE TRAMA")}${editable("RELACIÓN / CONEXIÓN")}${editable("ESTADO")}${actions()}</article>`,
-      missions:()=>`<article class="artifact"><span class="tag template-tag"></span><h3 contenteditable="true">NOMBRE</h3>${editable("DIFICULTAD")}${editable("REQUISITOS")}${editable("FECHA LÍMITE")}${editable("PUNTOS")}<select class="status-select" aria-label="Estado de misión"><option>ACTIVA</option><option>COMPLETADA</option><option>FALLIDA</option><option>BLOQUEADA</option></select>${actions()}</article>`,
+      missions:()=>`<article class="artifact"><span class="tag template-tag">PLANTILLA EDITABLE</span><h3 contenteditable="true">NOMBRE</h3>${editable("DIFICULTAD")}${editable("REQUISITOS")}${editable("FECHA LÍMITE")}${editable("PUNTOS")}<select class="status-select" aria-label="Estado de misión"><option>ACTIVA</option><option>COMPLETADA</option><option>FALLIDA</option><option>BLOQUEADA</option></select>${actions()}</article>`,
       archives:()=>`<article class="artifact"><span class="tag">PORTAL #001</span><div class="image-slot mt-3"><span class="image-placeholder">[ IMAGEN ]</span><img alt="Imagen editable"><button type="button" class="image-upload-btn" >📷 ELEGIR IMAGEN</button><input type="file" accept="image/*"></div><h3 contenteditable="true">NOMBRE DE LA TEMÁTICA</h3>${editable("FECHA")}<p>ESTADO: CERRADO</p>${actions()}</article>`,
       reviews:()=>`<article class="artifact"><span class="tag template-tag">CARTA EDITABLE</span><h3 contenteditable="true">USUARIO</h3>${editable("PERSONAJE UTILIZADO")}${editable("TEMÁTICA")}${editable("VALORACIÓN")}${editable("OPINIÓN")}${editable("MOMENTO FAVORITO")}${editable("EVENTO FAVORITO")}${editable("¿QUÉ CAMBIARÍAS?")}${editable("¿VOLVERÍAS A JUGAR ESTA TEMÁTICA?")}${actions()}</article>`,
       updates:()=>`<article class="artifact"><span class="tag">TRANSMISIÓN</span>${editable("FECHA")}<h3 contenteditable="true">TÍTULO</h3>${editable("TIPO")}${editable("DESCRIPCIÓN")}${actions()}<button class="small-btn mt-2" onclick="moveTop(this)">MOVER ARRIBA</button></article>`,
-      arsenal:()=>`<article class="artifact"><div class="image-slot"><span class="image-placeholder">[ IMAGEN DEL OBJETO ]</span><img alt="Imagen del objeto"><button type="button" class="image-upload-btn" >📷 ELEGIR IMAGEN</button><input type="file" accept="image/*"></div><h3 contenteditable="true">NOMBRE</h3>${editable("USO")}${editable("LIMITACIÓN")}${editable("CONDICIÓN")}${editable("EFECTO")}${editable("MUNDO DE USO: HORROR / FANTASÍA / ETC.")}${actions()}</article>`,
+      arsenal:()=>`<article class="artifact"><div class="image-slot"><span class="image-placeholder">[ IMAGEN DEL OBJETO ]</span><img alt="Imagen del objeto"><button type="button" class="image-upload-btn" >📷 ELEGIR IMAGEN</button><input type="file" accept="image/*"></div><h3 contenteditable="true">NOMBRE</h3>${editable("TIPO")}${editable("DESCRIPCIÓN")}${editable("USO")}${editable("DURACIÓN")}${editable("EFECTO")}${editable("RESTRICCIONES")}${editable("DISPONIBILIDAD")}${actions()}</article>`,
       legacy:()=>`<article class="artifact"><div class="image-slot"><span class="image-placeholder">[ IMAGEN DEL PODER ]</span><img alt="Imagen del poder"><button type="button" class="image-upload-btn" >📷 ELEGIR IMAGEN</button><input type="file" accept="image/*"></div><h3 contenteditable="true">NOMBRE</h3>${editable("TIPO DE HABILIDAD")}${editable("DESCRIPCIÓN")}${editable("EFECTO")}${editable("DURACIÓN")}${editable("USOS")}${editable("CONDICIONES")}${editable("LIMITACIONES")}${editable("MODO DE OBTENCIÓN / DISPONIBILIDAD")}${actions()}</article>`
     };
-    function addCard(type){const el=document.getElementById(type);el.insertAdjacentHTML("beforeend",types[type]());if(window.lucide)lucide.createIcons();restoreImages();bindEditablePersistence(el);notice("Plantilla añadida al Archivo.")}
-    function duplicateCard(btn){const card=btn.closest(".artifact");card.parentElement.insertBefore(card.cloneNode(true),card.nextSibling);notice("Entrada duplicada.")}
-    function removeCard(btn){btn.closest(".artifact").remove();notice("Entrada eliminada.")}
-    function moveTop(btn){const card=btn.closest(".artifact");card.parentElement.prepend(card);notice("Transmisión movida arriba.")}
+    function addCard(type){if(!requireOwner())return;const el=document.getElementById(type);el.insertAdjacentHTML("beforeend",types[type]());if(window.lucide)lucide.createIcons();restoreImages();notice("Plantilla añadida al Archivo.")}
+    function duplicateCard(btn){if(!requireOwner())return;const card=btn.closest(".artifact");card.parentElement.insertBefore(card.cloneNode(true),card.nextSibling);notice("Entrada duplicada.")}
+    function removeCard(btn){if(!requireOwner())return;btn.closest(".artifact").remove();notice("Entrada eliminada.")}
+    function moveTop(btn){if(!requireOwner())return;const card=btn.closest(".artifact");card.parentElement.prepend(card);notice("Transmisión movida arriba.")}
     function openCard(btn){
       const card=btn.closest(".artifact");
       document.getElementById("modal-title").textContent="FICHA ABIERTA";
@@ -470,7 +515,6 @@ body{overflow-x:hidden}
       modalSlots.forEach((slot,i)=>{if(originalSlots[i]?.dataset.persistKey)slot.dataset.persistKey=originalSlots[i].dataset.persistKey;});
       document.getElementById("modal").classList.add("show");
       restoreImages();
-      bindEditablePersistence(content);
     }
     /* IMÁGENES DEL OWNER: cada espacio funciona como una foto de perfil persistente. */
     const IMAGE_DB_NAME='multicosmos-owner-images-v1';
@@ -570,6 +614,7 @@ body{overflow-x:hidden}
     });
 
     function previewImage(input){
+      if(!requireOwner()){input.value='';return;}
       const file=input.files&&input.files[0]; if(!file)return;
       const slot=input.closest('.image-slot'); if(!slot)return;
       const key=getImageKey(slot);
@@ -584,6 +629,7 @@ body{overflow-x:hidden}
       reader.readAsDataURL(file);
     }
     function deleteSavedImage(slot){
+      if(!requireOwner())return;
       const key=getImageKey(slot);
       removeStoredImage(key).then(()=>{
         const img=slot.querySelector('img'); if(img){img.removeAttribute('src');img.alt='';}
@@ -592,56 +638,16 @@ body{overflow-x:hidden}
         ensureImageDeleteButton(slot);
       });
     }
-    /* PERSISTENCIA DE TODO EL CONTENIDO EDITABLE */
-    const TEXT_STORE_PREFIX='multicosmos-text-v1:';
-    function textKey(el){
-      if(el.dataset.persistTextKey) return TEXT_STORE_PREFIX+el.dataset.persistTextKey;
-      const section=el.closest('.view')?.id || 'global';
-      const card=el.closest('.artifact');
-      const scope=card || el.closest('section') || document.body;
-      const fields=[...scope.querySelectorAll('[contenteditable="true"]')];
-      const index=Math.max(0,fields.indexOf(el));
-      let cardKey='root';
-      if(card){
-        const cards=[...document.querySelectorAll(`#${CSS.escape(section)} .artifact`)];
-        cardKey='card-'+Math.max(0,cards.indexOf(card));
-      }
-      el.dataset.persistTextKey=`${section}-${cardKey}-field-${index}`;
-      return TEXT_STORE_PREFIX+el.dataset.persistTextKey;
-    }
-    function saveEditable(el){
-      try{localStorage.setItem(textKey(el),el.innerHTML)}catch(e){/* si el almacenamiento está lleno, no altera la página */}
-    }
-    function restoreEditable(el){
-      const saved=localStorage.getItem(textKey(el));
-      if(saved!==null) el.innerHTML=saved;
-    }
-    function bindEditablePersistence(root=document){
-      root.querySelectorAll('[contenteditable="true"]').forEach(el=>{
-        if(el.dataset.textPersistenceBound)return;
-        el.dataset.textPersistenceBound='1';
-        restoreEditable(el);
-        el.addEventListener('input',()=>saveEditable(el));
-        el.addEventListener('blur',()=>saveEditable(el));
-      });
-    }
-    function persistAllEditable(){bindEditablePersistence(document);document.querySelectorAll('[contenteditable="true"]').forEach(saveEditable)}
-    function clearEditable(el){el.innerHTML='';saveEditable(el)}
-
     function closeModal(){document.getElementById("modal").classList.remove("show")}
-    function addReservation(){document.getElementById("reservations").insertAdjacentHTML("beforeend",`<tr><td>${editable("PERSONAJE")}</td><td>${editable("OBRA")}</td><td>${editable("USUARIO")}</td><td>${editable("RESERVADO HASTA: [DD/MM/AAAA]")}</td><td><select class="status-select" aria-label="Estado"><option>DISPONIBLE</option><option>RESERVADO</option><option>EN USO</option><option>BLOQUEADO</option></select></td><td><button class="small-btn danger" onclick="this.closest('tr').remove()">ELIMINAR</button></td></tr>`)}
-    function duplicateCurrent(){notice("Estructura mensual lista para duplicar en el editor.");}
-    function resetEditable(){document.querySelectorAll("#view-11 [contenteditable]").forEach(e=>e.textContent=e.textContent.includes("TEMÁTICA")?"TEMÁTICA: [EDITAR]":"[ EDITAR ]");notice("Los campos del portal se reiniciaron.")}
+    function addReservation(){if(!requireOwner())return;document.getElementById("reservations").insertAdjacentHTML("beforeend",`<tr><td>${editable("PERSONAJE")}</td><td>${editable("OBRA")}</td><td>${editable("USUARIO")}</td><td>${editable("RESERVADO HASTA: [DD/MM/AAAA]")}</td><td><select class="status-select" aria-label="Estado"><option>DISPONIBLE</option><option>RESERVADO</option><option>EN USO</option><option>BLOQUEADO</option></select></td><td><button class="small-btn danger" onclick="this.closest('tr').remove()">ELIMINAR</button></td></tr>`)}
+    function duplicateCurrent(){if(!requireOwner())return;notice("Estructura mensual lista para duplicar en el editor.");}
+    function resetEditable(){if(!requireOwner())return;document.querySelectorAll("#view-11 [contenteditable]").forEach(e=>e.textContent=e.textContent.includes("TEMÁTICA")?"TEMÁTICA: [EDITAR]":"[ EDITAR ]");notice("Los campos del portal se reiniciaron.")}
     function openEditableLink(btn){const fields=btn.parentElement.querySelectorAll(".editable");const url=fields[1].textContent.trim();if(/^https:\/\//.test(url))window.open(url,"_blank","noopener,noreferrer");else notice("Añade un enlace HTTPS válido antes de abrir la conexión.")}
 
     function tabSystem(tabTarget, contentTarget, values, kind){
       const tabs=document.getElementById(tabTarget), content=document.getElementById(contentTarget);
-      values.forEach((v,i)=>{const b=document.createElement("button");b.className="tab"+(!i?" active":"");b.textContent=v;b.onclick=()=>{tabs.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");content.innerHTML=`<div class="artifact"><span class="tag template-tag"></span><h3>${v}</h3><div class="editable" contenteditable="true">[ CONTENIDO EDITABLE ]</div>${kind==="rules"&&v==="ACTIVIDAD"?`<p class="mt-4 font-semibold">Cada integrante debe realizar mínimo 2 participaciones de rol por semana.</p><p>Las participaciones deben ser válidas dentro del sistema de rol y respetar las reglas del universo.</p>`:""}${kind==="rules"?`<h3 class="mt-4">ACLARACIONES Y EXCEPCIONES</h3><div class="editable" contenteditable="true">[ EDITAR ]</div>`:""}</div>`};tabs.appendChild(b)});tabs.firstChild.click()
+      values.forEach((v,i)=>{const b=document.createElement("button");b.className="tab"+(!i?" active":"");b.textContent=v;b.onclick=()=>{tabs.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");content.innerHTML=`<div class="artifact"><span class="tag template-tag">PLANTILLA EDITABLE</span><h3>${v}</h3><div class="editable" contenteditable="true">[ CONTENIDO EDITABLE ]</div>${kind==="rules"&&v==="ACTIVIDAD"?`<p class="mt-4 font-semibold">Cada integrante debe realizar mínimo 2 participaciones de rol por semana.</p><p>Las participaciones deben ser válidas dentro del sistema de rol y respetar las reglas del universo.</p>`:""}${kind==="rules"?`<h3 class="mt-4">ACLARACIONES Y EXCEPCIONES</h3><div class="editable" contenteditable="true">[ EDITAR ]</div>`:""}</div>`};tabs.appendChild(b)});tabs.firstChild.click()
     }
-
-    function pointCard(){return `<article class="artifact points-card"><span class="tag">FICHA DE PUNTUACIÓN</span><h3 contenteditable="true">NOMBRE DEL PERSONAJE</h3><div class="points-grid">${editable("ACTIVIDAD: 0")}${editable("MENSAJES VÁLIDOS: 0")}${editable("MISIONES COMPLETADAS: 0")}${editable("DINÁMICAS: 0")}${editable("PARTICIPACIÓN: 0")}${editable("TOTAL: 0")}</div><div class="admin-row"><button class="small-btn" onclick="duplicatePoints(this)">DUPLICAR FICHA</button><button class="small-btn" onclick="resetPoints(this)">REINICIAR FICHA</button><button class="small-btn danger" onclick="removeCard(this)">ELIMINAR</button></div></article>`}
-    function duplicatePoints(btn){const card=btn.closest('.points-card');const copy=card.cloneNode(true);copy.querySelectorAll('[data-text-persistence-bound]').forEach(x=>delete x.dataset.textPersistenceBound);card.parentElement.insertBefore(copy,card.nextSibling);bindEditablePersistence(copy);notice("Ficha de puntuación duplicada.")}
-    function resetPoints(btn){const card=btn.closest('.points-card');const fields=card.querySelectorAll('[contenteditable]');fields.forEach((f,i)=>{if(i===0)f.textContent='NOMBRE DEL PERSONAJE';else{const label=f.textContent.split(':')[0];f.textContent=label+': 0'}saveEditable(f)});notice("Ficha de puntuación reiniciada.")}
 
     function init(){
       labels.steps.forEach(x=>document.getElementById("steps-list").insertAdjacentHTML("beforeend",`<article class="artifact"><span class="tag">RUTA</span><h3>${x}</h3><div class="editable" contenteditable="true">[ NOTA EDITABLE ]</div></article>`));
@@ -650,16 +656,26 @@ body{overflow-x:hidden}
       if(monthlyStructure) labels.weekly.forEach((x,i)=>monthlyStructure.insertAdjacentHTML("beforeend",`<article class="artifact"><span class="tag">DÍAS ${(i*7)+1}–${(i+1)*7+2}</span><h3>${x}</h3>${editable("FECHA: [EDITAR]")}${editable("NOTAS: [EDITAR]")}</article>`));
       tabSystem("mission-tabs","missions",labels.mission,"mission");
       tabSystem("arsenal-tabs","arsenal",labels.arsenal,"arsenal");
-      document.getElementById("points").insertAdjacentHTML("beforeend",pointCard());
+      labels.points.forEach(x=>document.getElementById("points").insertAdjacentHTML("beforeend",`<article class="artifact"><span class="tag template-tag">EDITABLE</span><h3>${x}</h3><div class="editable text-2xl font-bold" contenteditable="true">[ 0 ]</div></article>`));
       tabSystem("lore-tabs","lore-content",labels.lore,"lore");
       labels.faq.forEach(q=>document.getElementById("faq-list").insertAdjacentHTML("beforeend",`<article class="faq-item"><button type="button" class="faq-q" onclick="this.parentElement.classList.toggle('open')">✉️ <span>${q}</span><span>＋</span></button><div class="faq-a"><div class="editable" contenteditable="true">[ RESPUESTA EDITABLE ]</div></div></article>`));
-      ["fragments","occupied","wanted","missions","archives","reviews","updates","arsenal","legacy"].forEach(addCard);addReservation();
+      ["characters","occupied","wanted","missions","archives","reviews","updates","arsenal","legacy"].forEach(addCard);addReservation();
       addSectionCloseActions();
       if(window.lucide)lucide.createIcons();
-      bindEditablePersistence(document);
-      restoreImages();
     }
-    document.addEventListener("DOMContentLoaded",()=>{ init(); document.querySelectorAll(".index-link").forEach(b=>b.addEventListener("click",()=>goTo(Number(b.dataset.view)))); });
+    document.addEventListener('beforeinput',e=>{if(!ownerMode && e.target.closest('[contenteditable="true"]'))e.preventDefault();});
+    document.addEventListener('keydown',e=>{if(!ownerMode && e.target.closest('[contenteditable="true"]')){e.preventDefault();}});
+    document.addEventListener('click',e=>{
+      if(ownerMode)return;
+      const target=e.target.closest('.admin-row,.image-upload-btn,.image-delete-btn,button[onclick^="addCard"],button[onclick^="addReservation"],button[onclick^="duplicateCurrent"],button[onclick^="resetEditable"],button[onclick^="moveTop"],button[onclick^="removeCard"],button[onclick^="duplicateCard"]');
+      if(target){e.preventDefault();e.stopPropagation();notice('Activa el modo edición para modificar el archivo.');}
+    },true);
+    document.addEventListener("DOMContentLoaded",()=>{
+      init();
+      document.querySelectorAll(".index-link").forEach(b=>b.addEventListener("click",()=>goTo(Number(b.dataset.view))));
+      ownerMode=sessionStorage.getItem('multicosmos-owner-mode')==='1';
+      applyOwnerMode();
+    });
   </script>
  
 </body></html>
