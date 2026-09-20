@@ -68,6 +68,122 @@
 .image-slot.has-image img{display:block}
 .image-slot.has-image .image-actions{margin-top:8px}
 .image-delete-btn{display:none}
+
+    /* ESTILO VISUAL DEL SISTEMA DE PUNTOS — ficha tipo objeto/inventario */
+    .point-profile{
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(170,150,255,.35)!important;
+      border-radius:18px!important;
+      padding:22px!important;
+      background:
+        radial-gradient(circle at 92% 8%, rgba(139,92,246,.16), transparent 28%),
+        linear-gradient(145deg, rgba(24,20,42,.98), rgba(13,13,24,.98))!important;
+      box-shadow:0 10px 30px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.06)!important;
+    }
+    .point-profile::before{
+      content:"MULTICOSMOS • REGISTRO";
+      display:block;
+      font-size:.67rem;
+      letter-spacing:.18em;
+      opacity:.58;
+      margin-bottom:12px;
+    }
+    .point-profile::after{
+      content:"✦";
+      position:absolute;
+      right:18px;
+      top:14px;
+      font-size:2.2rem;
+      opacity:.16;
+      pointer-events:none;
+    }
+    .point-profile .template-tag{
+      display:inline-flex;
+      margin-bottom:8px;
+      border:1px solid rgba(170,150,255,.3);
+      background:rgba(139,92,246,.1);
+    }
+    .point-character-title{
+      margin:0 0 18px!important;
+      font-size:1.35rem!important;
+      letter-spacing:.04em;
+    }
+    .point-profile-grid{
+      display:grid!important;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px!important;
+      padding:14px;
+      border-radius:14px;
+      background:rgba(0,0,0,.16);
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .point-profile-grid label{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      font-size:.68rem;
+      letter-spacing:.09em;
+      opacity:.8;
+    }
+    .point-profile-grid label:first-child{
+      grid-column:1/-1;
+    }
+    .point-input{
+      width:100%;
+      box-sizing:border-box;
+      font-size:.92rem!important;
+    }
+    .point-summary{
+      display:grid!important;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:8px!important;
+      margin-top:14px;
+    }
+    .point-summary>div{
+      min-height:58px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:4px;
+      padding:10px;
+      border-radius:12px;
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.065);
+    }
+    .point-summary span{
+      font-size:.62rem;
+      letter-spacing:.08em;
+      opacity:.62;
+    }
+    .point-summary strong{
+      font-size:1.15rem;
+    }
+    .point-summary .point-total{
+      grid-column:1/-1;
+      align-items:center;
+      text-align:center;
+      min-height:76px;
+      background:linear-gradient(135deg,rgba(139,92,246,.17),rgba(255,255,255,.045));
+      border-color:rgba(170,150,255,.28);
+    }
+    .point-summary .point-total strong{
+      font-size:1.75rem;
+    }
+    .point-profile .admin-row{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .point-profile .admin-row .small-btn{
+      border-radius:10px;
+    }
+    @media(max-width:650px){
+      .point-profile-grid,.point-summary{grid-template-columns:1fr!important}
+      .point-profile-grid label:first-child,.point-summary .point-total{grid-column:auto}
+    }
+
 </style>
   <script src="/_sdk/8de366929c5f3b48.data_sdk.js" type="text/javascript" integrity="sha512-TyQ8k8cZj66xe/aENmn6RyZpdOFZXbAo5+KBG3PeFM+Q4qMTHU8xAqmq4ADClNfPrstgQYV6OzZHwLTnElzB2g=="></script>
   <script src="/_sdk/a558f474cd01d324.resizing_sdk.js" type="text/javascript" integrity="sha512-evIEjzvRDdaV6tHT4THeYa18+ppfgUj4Zpx5W8R1gaF2VKcOba7TPP4x2YYqsfThPwuC5NaBFyUH6V81c3i8kA=="></script>
@@ -305,7 +421,7 @@ body{overflow-x:hidden}
       <p class="eyebrow">PÁGINA 14 · ESTADÍSTICAS EDITABLES</p>
       <h1 class="page-title">SISTEMA DE PUNTOS</h1>
       <p class="page-lead">Los puntos se reinician al finalizar cada portal.</p>
-      <div id="points" class="card-grid"></div>
+      <div id="points" class="card-grid"></div><button class="small-btn mt-4" onclick="addPointProfile()">AÑADIR FICHA DE PERSONAJE</button>
      </div>
     </section>
     <section id="view-15" class="view">
@@ -441,13 +557,37 @@ body{overflow-x:hidden}
       setTimeout(()=>goTo(2),600);
     }
     const secretSlots={"📖":"LIBRO","✉️":"CARTA","🦋":"MARIPOSA","📦":"CAJA"};
+    const SECRET_TEXT_DB_KEY='multicosmos-secret-text-v1';
+
+    function loadSecretTextState(){
+      try{return JSON.parse(localStorage.getItem(SECRET_TEXT_DB_KEY)||'{}')}catch(e){return {}}
+    }
+
+    function saveSecretText(kind,value){
+      try{
+        const state=loadSecretTextState();
+        state[kind]=value;
+        localStorage.setItem(SECRET_TEXT_DB_KEY,JSON.stringify(state));
+      }catch(e){
+        notice('No se pudo guardar la información de este objeto en este navegador.');
+      }
+    }
+
     function openSecret(kind){
+      const state=loadSecretTextState();
+      const saved=state[kind];
+      const initial=saved!==undefined?saved:`[ INFORMACIÓN EDITABLE DEL ${kind} ]`;
       const title=`SECRETO · ${kind}`;
       document.getElementById("modal-title").textContent=title;
-      document.getElementById("modal-content").innerHTML=`<div class="image-slot" id="secret-preview" data-persist-key="secret-${kind}"><span class="image-placeholder"></span><img alt="Imagen editable"><button type="button" class="image-upload-btn" >📷 ELEGIR IMAGEN</button><input type="file" accept="image/*"></div><div class="editable" contenteditable="true">[ INFORMACIÓN EDITABLE DEL ${kind} ]</div><button type="button" class="small-btn mt-3" onclick="closeModal()">CERRAR</button>`;
+      document.getElementById("modal-content").innerHTML=`<div class="image-slot" id="secret-preview" data-persist-key="secret-${kind}"><span class="image-placeholder"></span><img alt="Imagen editable"><button type="button" class="image-upload-btn" >📷 ELEGIR IMAGEN</button><input type="file" accept="image/*"></div><div id="secret-info-edit" class="editable" contenteditable="true"></div><button type="button" class="small-btn mt-3" onclick="closeModal()">CERRAR</button>`;
+      const info=document.getElementById("secret-info-edit");
+      info.textContent=initial;
+      info.addEventListener('input',()=>{
+        if(ownerMode)saveSecretText(kind,info.innerHTML);
+      });
       document.getElementById("modal").classList.add("show");
-      // Restaurar la imagen guardada de esta carta cada vez que se vuelve a abrir.
       restoreImages();
+      applyOwnerMode();
     }
     function addSectionCloseActions(){}
     let ownerMode=false;
@@ -477,6 +617,7 @@ body{overflow-x:hidden}
       document.body.classList.toggle('owner-mode',ownerMode);
       document.querySelectorAll('[contenteditable]').forEach(el=>el.setAttribute('contenteditable',ownerMode?'true':'false'));
       document.querySelectorAll('.image-upload-btn,.image-delete-btn').forEach(el=>el.disabled=!ownerMode);
+      updatePointInputsState();
       const b=document.getElementById('owner-mode-btn');
       if(b)b.textContent=ownerMode?'🔓 SALIR DEL MODO EDICIÓN':'🔐 MODO EDICIÓN';
     }
@@ -638,15 +779,279 @@ body{overflow-x:hidden}
         ensureImageDeleteButton(slot);
       });
     }
-    function closeModal(){document.getElementById("modal").classList.remove("show")}
+    function closeModal(){
+      const info=document.getElementById("secret-info-edit");
+      const title=document.getElementById("modal-title")?.textContent||'';
+      const match=title.match(/^SECRETO · (.+)$/);
+      if(info && match && ownerMode)saveSecretText(match[1],info.innerHTML);
+      document.getElementById("modal").classList.remove("show");
+    }
     function addReservation(){if(!requireOwner())return;document.getElementById("reservations").insertAdjacentHTML("beforeend",`<tr><td>${editable("PERSONAJE")}</td><td>${editable("OBRA")}</td><td>${editable("USUARIO")}</td><td>${editable("RESERVADO HASTA: [DD/MM/AAAA]")}</td><td><select class="status-select" aria-label="Estado"><option>DISPONIBLE</option><option>RESERVADO</option><option>EN USO</option><option>BLOQUEADO</option></select></td><td><button class="small-btn danger" onclick="this.closest('tr').remove()">ELIMINAR</button></td></tr>`)}
     function duplicateCurrent(){if(!requireOwner())return;notice("Estructura mensual lista para duplicar en el editor.");}
     function resetEditable(){if(!requireOwner())return;document.querySelectorAll("#view-11 [contenteditable]").forEach(e=>e.textContent=e.textContent.includes("TEMÁTICA")?"TEMÁTICA: [EDITAR]":"[ EDITAR ]");notice("Los campos del portal se reiniciaron.")}
     function openEditableLink(btn){const fields=btn.parentElement.querySelectorAll(".editable");const url=fields[1].textContent.trim();if(/^https:\/\//.test(url))window.open(url,"_blank","noopener,noreferrer");else notice("Añade un enlace HTTPS válido antes de abrir la conexión.")}
 
+    const TAB_STATE_KEY='multicosmos-tab-content-v1';
+    function loadTabState(){try{return JSON.parse(localStorage.getItem(TAB_STATE_KEY)||'{}')}catch(e){return {}}}
+    function saveTabState(state){try{localStorage.setItem(TAB_STATE_KEY,JSON.stringify(state))}catch(e){}}
+    function tabStateId(tabTarget,kind,v){return `${kind}::${tabTarget}::${v}`}
+    function tabTemplate(v,kind){return `<div class="artifact"><span class="tag template-tag">PLANTILLA EDITABLE</span><h3>${v}</h3><div class="editable" contenteditable="true">[ CONTENIDO EDITABLE ]</div>${kind==="rules"&&v==="ACTIVIDAD"?`<p class="mt-4 font-semibold">Cada integrante debe realizar mínimo 2 participaciones de rol por semana.</p><p>Las participaciones deben ser válidas dentro del sistema de rol y respetar las reglas del universo.</p>`:""}${kind==="rules"?`<h3 class="mt-4">ACLARACIONES Y EXCEPCIONES</h3><div class="editable" contenteditable="true">[ EDITAR ]</div>`:""}</div>`}
+    function captureTabState(content,key){const state=loadTabState();state[key]=content.innerHTML;saveTabState(state)}
+    function restoreTabState(content,key,v,kind){
+      const state=loadTabState();
+      content.innerHTML=state[key]||tabTemplate(v,kind);
+      content.querySelectorAll('[contenteditable="true"]').forEach(el=>el.addEventListener('input',()=>{if(ownerMode)captureTabState(content,key)}));
+      if(window.lucide)lucide.createIcons();
+      applyOwnerMode();
+    }
     function tabSystem(tabTarget, contentTarget, values, kind){
       const tabs=document.getElementById(tabTarget), content=document.getElementById(contentTarget);
-      values.forEach((v,i)=>{const b=document.createElement("button");b.className="tab"+(!i?" active":"");b.textContent=v;b.onclick=()=>{tabs.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");content.innerHTML=`<div class="artifact"><span class="tag template-tag">PLANTILLA EDITABLE</span><h3>${v}</h3><div class="editable" contenteditable="true">[ CONTENIDO EDITABLE ]</div>${kind==="rules"&&v==="ACTIVIDAD"?`<p class="mt-4 font-semibold">Cada integrante debe realizar mínimo 2 participaciones de rol por semana.</p><p>Las participaciones deben ser válidas dentro del sistema de rol y respetar las reglas del universo.</p>`:""}${kind==="rules"?`<h3 class="mt-4">ACLARACIONES Y EXCEPCIONES</h3><div class="editable" contenteditable="true">[ EDITAR ]</div>`:""}</div>`};tabs.appendChild(b)});tabs.firstChild.click()
+      let activeKey=null;
+      values.forEach((v,i)=>{
+        const b=document.createElement("button");
+        b.className="tab"+(!i?" active":"");
+        b.textContent=v;
+        b.onclick=()=>{
+          if(activeKey)captureTabState(content,activeKey);
+          tabs.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+          b.classList.add("active");
+          activeKey=tabStateId(tabTarget,kind,v);
+          restoreTabState(content,activeKey,v,kind);
+        };
+        tabs.appendChild(b);
+      });
+      tabs.firstChild.click()
+    }
+
+
+    /* SISTEMA DE PUNTOS POR PERSONAJE
+       Cada ficha es independiente, se puede duplicar/eliminar y sus datos
+       se conservan en el navegador. */
+    const POINTS_DB_KEY='multicosmos-character-points-v3';
+
+    function loadPointProfiles(){
+      try{
+        const raw=localStorage.getItem(POINTS_DB_KEY);
+        if(raw)return JSON.parse(raw);
+        // Migración transparente de la versión anterior.
+        const old=JSON.parse(localStorage.getItem('multicosmos-character-points-v2')||'[]');
+        return old.map(p=>({
+          id:pointId(),
+          character:p.character||'NOMBRE DEL PERSONAJE',
+          points:Number(p.base)||0,
+          dynamics:(p.entries||[]).filter(e=>e.type==='dinamica').reduce((s,e)=>s+(Number(e.points)||0),0),
+          messages:(p.entries||[]).filter(e=>e.type==='mensajes').reduce((s,e)=>s+(Number(e.points)||0),0),
+          missionsCompleted:(p.entries||[]).filter(e=>e.type==='misionEspecial').reduce((s,e)=>s+(Number(e.points)||0),0),
+          participation:(p.entries||[]).filter(e=>e.type==='participacion').reduce((s,e)=>s+(Number(e.points)||0),0),
+          bonus:Number(p.bonus)||0
+        }));
+      }catch(e){return []}
+    }
+
+    function savePointProfiles(profiles){
+      try{localStorage.setItem(POINTS_DB_KEY,JSON.stringify(profiles))}catch(e){
+        notice('No se pudieron guardar los datos de puntos en este navegador.');
+      }
+    }
+
+    function pointId(){
+      return 'p_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8);
+    }
+
+    function createPointProfile(){
+      return {
+        id:pointId(),
+        character:'NOMBRE DEL PERSONAJE',
+        points:0,
+        dynamics:0,
+        messages:0,
+        missionsCompleted:0,
+        participation:0,
+        bonus:0
+      };
+    }
+
+    function calculatePointTotal(profile){
+      return (Number(profile.points)||0)
+        +(Number(profile.dynamics)||0)
+        +(Number(profile.messages)||0)
+        +(Number(profile.missionsCompleted)||0)
+        +(Number(profile.participation)||0)
+        +(Number(profile.bonus)||0);
+    }
+
+    function escapePointText(value){
+      return String(value??'').replace(/[&<>"']/g,m=>({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[m]));
+    }
+
+    function renderPointSystem(){
+      const container=document.getElementById('points');
+      if(!container)return;
+      const profiles=loadPointProfiles();
+      container.innerHTML=profiles.map(profile=>{
+        const total=calculatePointTotal(profile);
+        return `<article class="artifact point-profile" data-profile-id="${profile.id}">
+          <span class="tag template-tag">OBJETO · PUNTUACIÓN</span>
+          <h3 class="point-character-title">${escapePointText(profile.character)}</h3>
+
+          <div class="point-profile-grid">
+            <label>NOMBRE DEL PERSONAJE
+              <input class="canva-input point-input" data-point-edit data-point-field="character" value="${escapePointText(profile.character)}">
+            </label>
+            <label>PUNTOS
+              <input class="canva-input point-input point-number" data-point-edit data-point-field="points" type="number" value="${Number(profile.points)||0}">
+            </label>
+            <label>DINÁMICAS
+              <input class="canva-input point-input point-number" data-point-edit data-point-field="dynamics" type="number" value="${Number(profile.dynamics)||0}">
+            </label>
+            <label>MENSAJES
+              <input class="canva-input point-input point-number" data-point-edit data-point-field="messages" type="number" value="${Number(profile.messages)||0}">
+            </label>
+            <label>MISIONES COMPLETADAS
+              <input class="canva-input point-input point-number" data-point-edit data-point-field="missionsCompleted" type="number" value="${Number(profile.missionsCompleted)||0}">
+            </label>
+            <label>PARTICIPACIÓN
+              <input class="canva-input point-input point-number" data-point-edit data-point-field="participation" type="number" value="${Number(profile.participation)||0}">
+            </label>
+            <label>BONIFICACIÓN
+              <input class="canva-input point-input point-number" data-point-edit data-point-field="bonus" type="number" value="${Number(profile.bonus)||0}">
+            </label>
+          </div>
+
+          <div class="point-summary">
+            <div><span>PUNTOS</span><strong>${Number(profile.points)||0}</strong></div>
+            <div><span>DINÁMICAS</span><strong>${Number(profile.dynamics)||0}</strong></div>
+            <div><span>MENSAJES</span><strong>${Number(profile.messages)||0}</strong></div>
+            <div><span>MISIONES COMPLETADAS</span><strong>${Number(profile.missionsCompleted)||0}</strong></div>
+            <div><span>PARTICIPACIÓN</span><strong>${Number(profile.participation)||0}</strong></div>
+            <div><span>BONIFICACIÓN</span><strong>${Number(profile.bonus)||0}</strong></div>
+            <div class="point-total"><span>TOTAL DE PUNTOS</span><strong>${total}</strong></div>
+          </div>
+
+          <div class="admin-row">
+            <button type="button" class="small-btn" data-point-action="duplicate-profile">DUPLICAR FICHA</button>
+            <button type="button" class="small-btn" data-point-action="reset">REINICIAR FICHA</button>
+            <button type="button" class="small-btn danger" data-point-action="remove-profile">ELIMINAR FICHA</button>
+          </div>
+        </article>`;
+      }).join('');
+
+      if(window.lucide)lucide.createIcons();
+      applyOwnerMode();
+    }
+
+    function initPointSystem(){
+      let profiles=loadPointProfiles();
+      if(!profiles.length){
+        profiles=[createPointProfile()];
+        savePointProfiles(profiles);
+      }else{
+        savePointProfiles(profiles);
+      }
+      renderPointSystem();
+    }
+
+    function addPointProfile(){
+      if(!requireOwner())return;
+      const profiles=loadPointProfiles();
+      profiles.push(createPointProfile());
+      savePointProfiles(profiles);
+      renderPointSystem();
+      notice('Nueva ficha de personaje añadida.');
+    }
+
+    function duplicatePointProfile(profileId){
+      if(!requireOwner())return;
+      const profiles=loadPointProfiles();
+      const source=profiles.find(p=>p.id===profileId);
+      if(!source)return;
+      const copy={...source,id:pointId()};
+      profiles.splice(profiles.indexOf(source)+1,0,copy);
+      savePointProfiles(profiles);
+      renderPointSystem();
+      notice('Ficha de personaje duplicada.');
+    }
+
+    function resetPointProfile(profileId){
+      if(!requireOwner())return;
+      const profiles=loadPointProfiles();
+      const profile=profiles.find(p=>p.id===profileId);
+      if(!profile)return;
+      profile.points=0;
+      profile.dynamics=0;
+      profile.messages=0;
+      profile.missionsCompleted=0;
+      profile.participation=0;
+      profile.bonus=0;
+      savePointProfiles(profiles);
+      renderPointSystem();
+      notice('Ficha de puntos reiniciada.');
+    }
+
+    function removePointProfile(profileId){
+      if(!requireOwner())return;
+      let profiles=loadPointProfiles().filter(p=>p.id!==profileId);
+      if(!profiles.length)profiles=[createPointProfile()];
+      savePointProfiles(profiles);
+      renderPointSystem();
+      notice('Ficha de personaje eliminada.');
+    }
+
+    document.addEventListener('input',e=>{
+      const input=e.target.closest('#points [data-point-edit]');
+      if(!input || !ownerMode)return;
+      const card=input.closest('.point-profile');
+      const profileId=card?.dataset.profileId;
+      if(!profileId)return;
+      const profiles=loadPointProfiles();
+      const profile=profiles.find(p=>p.id===profileId);
+      if(!profile)return;
+      const field=input.dataset.pointField;
+      profile[field]=field==='character' ? input.value : (Number(input.value)||0);
+      savePointProfiles(profiles);
+
+      if(field==='character'){
+        const title=card.querySelector('.point-character-title');
+        if(title)title.textContent=input.value||'NOMBRE DEL PERSONAJE';
+      }
+      const total=card.querySelector('.point-total strong');
+      if(total)total.textContent=calculatePointTotal(profile);
+
+      const summaryMap={
+        points:'PUNTOS',
+        dynamics:'DINÁMICAS',
+        messages:'MENSAJES',
+        missionsCompleted:'MISIONES COMPLETADAS',
+        participation:'PARTICIPACIÓN',
+        bonus:'BONIFICACIÓN'
+      };
+      if(summaryMap[field]){
+        card.querySelectorAll('.point-summary > div').forEach(box=>{
+          if(box.querySelector('span')?.textContent===summaryMap[field]){
+            const strong=box.querySelector('strong');
+            if(strong)strong.textContent=profile[field];
+          }
+        });
+      }
+    });
+
+    document.addEventListener('click',e=>{
+      const action=e.target.closest('#points [data-point-action]');
+      if(!action)return;
+      const card=action.closest('.point-profile');
+      const profileId=card?.dataset.profileId;
+      const actionName=action.dataset.pointAction;
+      if(actionName==='duplicate-profile')duplicatePointProfile(profileId);
+      else if(actionName==='reset')resetPointProfile(profileId);
+      else if(actionName==='remove-profile')removePointProfile(profileId);
+    });
+
+    function updatePointInputsState(){
+      document.querySelectorAll('#points [data-point-edit],#points [data-point-action]').forEach(el=>{
+        if('disabled' in el)el.disabled=!ownerMode;
+      });
     }
 
     function init(){
@@ -656,7 +1061,7 @@ body{overflow-x:hidden}
       if(monthlyStructure) labels.weekly.forEach((x,i)=>monthlyStructure.insertAdjacentHTML("beforeend",`<article class="artifact"><span class="tag">DÍAS ${(i*7)+1}–${(i+1)*7+2}</span><h3>${x}</h3>${editable("FECHA: [EDITAR]")}${editable("NOTAS: [EDITAR]")}</article>`));
       tabSystem("mission-tabs","missions",labels.mission,"mission");
       tabSystem("arsenal-tabs","arsenal",labels.arsenal,"arsenal");
-      labels.points.forEach(x=>document.getElementById("points").insertAdjacentHTML("beforeend",`<article class="artifact"><span class="tag template-tag">EDITABLE</span><h3>${x}</h3><div class="editable text-2xl font-bold" contenteditable="true">[ 0 ]</div></article>`));
+      initPointSystem();
       tabSystem("lore-tabs","lore-content",labels.lore,"lore");
       labels.faq.forEach(q=>document.getElementById("faq-list").insertAdjacentHTML("beforeend",`<article class="faq-item"><button type="button" class="faq-q" onclick="this.parentElement.classList.toggle('open')">✉️ <span>${q}</span><span>＋</span></button><div class="faq-a"><div class="editable" contenteditable="true">[ RESPUESTA EDITABLE ]</div></div></article>`));
       ["characters","occupied","wanted","missions","archives","reviews","updates","arsenal","legacy"].forEach(addCard);addReservation();
